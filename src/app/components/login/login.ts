@@ -16,16 +16,12 @@ export class Login {
 
   formularioLogin = new FormGroup({
     email: new FormControl(''),
-    password: new FormControl(''),
+    password: new FormControl('')
   });
 
-<<<<<<<< <Temporary merge branch 1
-// Estado para alternar la visibilidad de la contraseña
-=========
   constructor(private authService: Auth, private router: Router) { }
 
   // Estado para ocultar la visibilidad de la contraseña
->>>>>>>>> Temporary merge branch 2
   mostrarContrasena: boolean = false;
 
   toggleMostrarContrasena() {
