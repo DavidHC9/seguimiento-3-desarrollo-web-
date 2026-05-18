@@ -11,10 +11,13 @@ import { Router } from '@angular/router';
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
+
 export class Login {
+
   formularioLogin = new FormGroup({
     email: new FormControl(''),
-    password: new FormControl(''),
+    password: new FormControl('')
+
   });
 
   // State to toggle password visibility
