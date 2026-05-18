@@ -74,8 +74,8 @@
 /* Contenedor circular pulido y limitado de la imagen */
 .illustration-wrapper {
   position: relative;
-  width: 260px;
-  height: 260px;
+  width: 320px;
+  height: 320px;
   margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
