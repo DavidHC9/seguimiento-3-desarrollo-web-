@@ -438,7 +438,7 @@
   padding: 9px 13px;
   font-family: 'Outfit', sans-serif;
   font-size: 0.9rem;
-  color: var(--text-dark);
+  color: #000000 !important;
   transition: all 0.25s ease;
   box-sizing: border-box;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -536,7 +536,7 @@
 /* Hoja A4 Fina */
 .cv-a4-sheet {
   background-color: var(--cream-card);
-  color: var(--text-dark);
+  color: #000000 !important;
   width: 100%;
   max-width: 800px;
   min-height: 1120px; /* Proporción A4 exacta */
@@ -641,7 +641,7 @@
 .cv-resumen-text {
   font-size: 0.92rem;
   line-height: 1.5;
-  color: var(--text-dark);
+  color: #000000 !important;
   text-align: justify;
   margin: 0;
 }
@@ -705,7 +705,7 @@
 .cv-item-desc {
   font-size: 0.88rem;
   line-height: 1.45;
-  color: #334346;
+  color: #000000 !important;
   margin: 0;
   text-align: justify;
 }
@@ -784,91 +784,3 @@
   }
 }
 
-/* ==================== REGLAS DE IMPRESION CRITICAS (PDF) ==================== */
-@media print {
-  /* Ocultar todos los elementos con la clase no-print */
-  .no-print, 
-  .home-header, 
-  .forms-panel, 
-  .btn-action, 
-  .language-selector,
-  .btn-add,
-  .btn-delete,
-  .modal-backdrop,
-  .modal-card {
-    display: none !important;
-  }
-
-  /* Resetear contenedores para impresión de página completa */
-  body, html, .home-container, .home-content, .preview-panel {
-    background: none !important;
-    background-color: #ffffff !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
-    display: block !important;
-  }
-
-  /* La hoja CV se expande al tamaño del papel físico */
-  .cv-a4-sheet {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-height: 0 !important;
-    height: auto !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: none !important;
-    box-shadow: none !important;
-    background-color: #ffffff !important;
-    background: #ffffff !important;
-    position: relative !important;
-    transform: none !important;
-    page-break-after: avoid !important;
-    page-break-inside: avoid !important;
-  }
-
-  /* SOLUCIÓN AL TEXTO INVISIBLE: Forzar colores de texto perfectamente legibles sobre blanco en el PDF */
-  .cv-a4-sheet,
-  .cv-a4-sheet * {
-    color: #1a1a1a !important; /* Forzar gris oscuro/negro en todo el texto */
-    background: transparent !important;
-  }
-
-  .cv-name {
-    color: #073540 !important; /* Azul teal oscuro para el nombre principal */
-  }
-
-  .cv-title-role {
-    color: #8c723b !important; /* Dorado oscuro elegante para el cargo */
-  }
-
-  .cv-section-title {
-    color: #073540 !important; /* Azul teal oscuro para los títulos de sección */
-    border-bottom: 1.5px solid #caa765 !important; /* Línea de separación dorada visible */
-  }
-
-  .cv-item-role {
-    color: #073540 !important;
-  }
-
-  .cv-item-dates {
-    color: #8c723b !important;
-  }
-
-  .cv-timeline-item {
-    border-left: 2px solid #caa765 !important; /* Línea dorada de la línea de tiempo */
-    page-break-inside: avoid !important;
-  }
-
-  .cv-timeline-item::before {
-    background-color: #ffffff !important;
-    border: 2px solid #073540 !important;
-  }
-
-  .footer-watermark {
-    color: #aebfc2 !important;
-  }
-}

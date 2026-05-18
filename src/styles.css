@@ -6,3 +6,100 @@ body {
   overflow-x: hidden;
   background-color: #02141a;
 }
+
+/* ==================== REGLAS DE IMPRESION CRITICAS (PDF GLOBAL) ==================== */
+@media print {
+  /* 1. Ocultar todos los elementos con la clase no-print y elementos de la interfaz */
+  .no-print, 
+  .home-header, 
+  .forms-panel, 
+  .btn-action, 
+  .language-selector,
+  .btn-add,
+  .btn-delete,
+  .modal-backdrop,
+  .modal-card {
+    display: none !important;
+  }
+
+  /* 2. Forzar que todos los contenedores padres fluyan naturalmente en bloque y no colapsen en altura */
+  html, body, app-root, .home-container, .home-content, .preview-panel {
+    background: none !important;
+    background-color: #ffffff !important;
+    color: #1a1a1a !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    position: relative !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* 3. La hoja CV se expande al tamaño del papel físico sin transformaciones */
+  .cv-a4-sheet {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+    position: relative !important;
+    transform: none !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* 4. SOLUCIÓN CRÍTICA AL TEXTO INVISIBLE: Forzar colores legibles sobre blanco en el PDF */
+  .cv-a4-sheet,
+  .cv-a4-sheet * {
+    color: #1a1a1a !important; /* Forzar gris oscuro en todo el texto */
+    background: transparent !important;
+  }
+
+  .cv-name {
+    color: #073540 !important; /* Azul teal oscuro para el nombre principal */
+    font-size: 2rem !important;
+  }
+
+  .cv-title-role {
+    color: #8c723b !important; /* Dorado oscuro elegante para el cargo */
+  }
+
+  .cv-section-title {
+    color: #073540 !important; /* Azul teal oscuro para los títulos de sección */
+    border-bottom: 1.5px solid #caa765 !important; /* Línea de separación dorada visible */
+  }
+
+  .cv-item-role {
+    color: #073540 !important;
+  }
+
+  .cv-item-dates {
+    color: #8c723b !important;
+  }
+
+  .cv-timeline-item {
+    border-left: 2px solid #caa765 !important; /* Línea dorada de la línea de tiempo */
+    page-break-inside: avoid !important;
+  }
+
+  .cv-timeline-item::before {
+    background-color: #ffffff !important;
+    border: 2px solid #073540 !important;
+  }
+
+  .footer-watermark {
+    color: #aebfc2 !important;
+  }
+}
