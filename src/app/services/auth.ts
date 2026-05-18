@@ -11,7 +11,6 @@ interface LoginResponse {
 })
 export class Auth {
   private apiUrl = 'http://localhost:2026/api/usuario/login';
-  private tokenKey = 'token';
 
   constructor(private http: HttpClient) { }
 

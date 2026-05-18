@@ -1,2 +1,270 @@
-<p>home works!</p>
-<p>La vida es dura</p>
+<div class="home-container">
+
+  <!-- ==================== HEADER SUPERIOR (NO SE IMPRIME) ==================== -->
+  <header class="home-header no-print">
+    <div class="header-logo">
+      <span class="logo-icon">👑</span>
+      <h1 class="logo-title">CV<span>Maker</span></h1>
+    </div>
+
+    <div class="header-controls">
+      <!-- Selector de Idioma -->
+      <div class="language-selector">
+        <button 
+          type="button" 
+          class="btn-lang" 
+          [class.active]="idioma === 'ES'" 
+          (click)="cambiarIdioma('ES')">
+          🇪🇸 ES
+        </button>
+        <button 
+          type="button" 
+          class="btn-lang" 
+          [class.active]="idioma === 'EN'" 
+          (click)="cambiarIdioma('EN')">
+          🇺🇸 EN
+        </button>
+      </div>
+
+      <!-- Botón de Descarga PDF -->
+      <button type="button" class="btn-action btn-pdf" (click)="descargarPDF()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <span>{{ idioma === 'ES' ? 'Descargar PDF' : 'Download PDF' }}</span>
+      </button>
+
+      <!-- Botón Cerrar Sesión -->
+      <button type="button" class="btn-action btn-logout" (click)="cerrarSesion()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+        <span>{{ idioma === 'ES' ? 'Salir' : 'Logout' }}</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==================== CONTENIDO PRINCIPAL ==================== -->
+  <main class="home-content">
+
+    <!-- ==================== COLUMNA IZQUIERDA: FORMULARIOS (NO SE IMPRIME) ==================== -->
+    <section class="forms-panel no-print">
+      
+      <!-- Panel 1: Información Personal (infoPersonal) -->
+      <div class="accordion-card">
+        <div class="accordion-header">
+          <span class="step-num">1</span>
+          <h3>{{ idioma === 'ES' ? 'Información Personal' : 'Personal Info' }}</h3>
+        </div>
+        <div class="accordion-body">
+          <div class="form-grid">
+            <div class="form-group-custom">
+              <label class="label-custom">{{ idioma === 'ES' ? 'Nombre Completo' : 'Full Name' }}</label>
+              <input type="text" class="input-custom" [(ngModel)]="infoPersonal.nombreCompleto">
+            </div>
+            <div class="form-group-custom">
+              <label class="label-custom">{{ idioma === 'ES' ? 'Cargo / Profesión' : 'Job Title' }}</label>
+              <input type="text" class="input-custom" [(ngModel)]="infoPersonal.cargo">
+            </div>
+            <div class="form-group-custom">
+              <label class="label-custom">Email</label>
+              <input type="email" class="input-custom" [(ngModel)]="infoPersonal.email">
+            </div>
+            <div class="form-group-custom">
+              <label class="label-custom">{{ idioma === 'ES' ? 'Teléfono Celular' : 'Phone Number' }}</label>
+              <input type="text" class="input-custom" [(ngModel)]="infoPersonal.celular">
+            </div>
+            <div class="form-group-custom full-width">
+              <label class="label-custom">{{ idioma === 'ES' ? 'Resumen Profesional' : 'Professional Summary' }}</label>
+              <textarea class="textarea-custom" rows="4" [(ngModel)]="infoPersonal.resumen"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2: Experiencia Laboral (experiencia) -->
+      <div class="accordion-card">
+        <div class="accordion-header">
+          <span class="step-num">2</span>
+          <h3>{{ idioma === 'ES' ? 'Experiencia Laboral' : 'Work Experience' }}</h3>
+          <button type="button" class="btn-add" (click)="agregarExperiencia()">
+            + {{ idioma === 'ES' ? 'Añadir' : 'Add' }}
+          </button>
+        </div>
+        <div class="accordion-body">
+          <div *ngFor="let exp of experiencias; let i = index" class="list-item-card">
+            <div class="item-card-header">
+              <h4>{{ idioma === 'ES' ? 'Experiencia' : 'Experience' }} #{{ i + 1 }}</h4>
+              <button type="button" class="btn-delete" (click)="eliminarExperiencia(i)">
+                🗑️
+              </button>
+            </div>
+            <div class="form-grid">
+              <div class="form-group-custom">
+                <label class="label-custom">{{ idioma === 'ES' ? 'Empresa' : 'Company' }}</label>
+                <input type="text" class="input-custom" [(ngModel)]="exp.empresa">
+              </div>
+              <div class="form-group-custom">
+                <label class="label-custom">{{ idioma === 'ES' ? 'Cargo' : 'Role' }}</label>
+                <input type="text" class="input-custom" [(ngModel)]="exp.cargo">
+              </div>
+              <div class="form-group-custom">
+                <label class="label-custom">{{ idioma === 'ES' ? 'Fecha de Inicio' : 'Start Date' }}</label>
+                <input type="text" class="input-custom" placeholder="AAAA-MM-DD" [(ngModel)]="exp.fechaInicio">
+              </div>
+              <div class="form-group-custom">
+                <label class="label-custom">{{ idioma === 'ES' ? 'Fecha de Fin' : 'End Date' }}</label>
+                <input type="text" class="input-custom" placeholder="AAAA-MM-DD" [(ngModel)]="exp.fechaFin">
+              </div>
+              <div class="form-group-custom full-width">
+                <label class="label-custom">{{ idioma === 'ES' ? 'Descripción de Logros' : 'Achievements Description' }}</label>
+                <textarea class="textarea-custom" rows="3" [(ngModel)]="exp.descripcion"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 3: Certificados (certificado) -->
+      <div class="accordion-card">
+        <div class="accordion-header">
+          <span class="step-num">3</span>
+          <h3>{{ idioma === 'ES' ? 'Certificaciones y Cursos' : 'Certifications & Courses' }}</h3>
+          <button type="button" class="btn-add" (click)="agregarCertificado()">
+            + {{ idioma === 'ES' ? 'Añadir' : 'Add' }}
+          </button>
+        </div>
+        <div class="accordion-body">
+          <div *ngFor="let cert of certificados; let i = index" class="list-item-card">
+            <div class="item-card-header">
+              <h4>{{ idioma === 'ES' ? 'Certificado' : 'Certificate' }} #{{ i + 1 }}</h4>
+              <button type="button" class="btn-delete" (click)="eliminarCertificado(i)">
+                🗑️
+              </button>
+            </div>
+            <div class="form-grid">
+              <div class="form-group-custom">
+                <label class="label-custom">{{ idioma === 'ES' ? 'Nombre del Certificado' : 'Certificate Name' }}</label>
+                <input type="text" class="input-custom" [(ngModel)]="cert.nombreCertificado">
+              </div>
+              <div class="form-group-custom">
+                <label class="label-custom">{{ idioma === 'ES' ? 'Institución' : 'Institution' }}</label>
+                <input type="text" class="input-custom" [(ngModel)]="cert.institucion">
+              </div>
+              <div class="form-group-custom">
+                <label class="label-custom">{{ idioma === 'ES' ? 'Fecha' : 'Date' }}</label>
+                <input type="text" class="input-custom" placeholder="AAAA-MM-DD" [(ngModel)]="cert.fecha">
+              </div>
+              <div class="form-group-custom full-width">
+                <label class="label-custom">{{ idioma === 'ES' ? 'Descripción / Temas' : 'Description / Topics' }}</label>
+                <textarea class="textarea-custom" rows="2" [(ngModel)]="cert.descripcion"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==================== COLUMNA DERECHA: PREVISUALIZACIÓN HOJA A4 (IMPRIMIBLE) ==================== -->
+    <section class="preview-panel">
+      
+      <!-- Hoja A4 Premium con Bindings en Tiempo Real -->
+      <article class="cv-a4-sheet">
+        
+        <!-- ENCABEZADO DE HOJA DE VIDA -->
+        <header class="cv-header">
+          <h2 class="cv-name">{{ infoPersonal.nombreCompleto || (idioma === 'ES' ? 'Nombre Completo' : 'Full Name') }}</h2>
+          <p class="cv-title-role">{{ infoPersonal.cargo || (idioma === 'ES' ? 'Profesión' : 'Profession') }}</p>
+          <div class="cv-divider">
+            <span class="divider-dot"></span>
+            <span class="divider-line"></span>
+            <span class="divider-dot"></span>
+          </div>
+          
+          <!-- Datos de contacto -->
+          <div class="cv-contact-row">
+            <span *ngIf="infoPersonal.celular" class="contact-item">
+              <span class="contact-icon">📞</span>
+              {{ infoPersonal.celular }}
+            </span>
+            <span *ngIf="infoPersonal.email" class="contact-item">
+              <span class="contact-icon">✉️</span>
+              {{ infoPersonal.email }}
+            </span>
+          </div>
+        </header>
+
+        <!-- SECCIÓN 1: RESUMEN PROFESIONAL -->
+        <section *ngIf="infoPersonal.resumen" class="cv-section">
+          <h3 class="cv-section-title">
+            {{ idioma === 'ES' ? 'RESUMEN PROFESIONAL' : 'PROFESSIONAL SUMMARY' }}
+          </h3>
+          <p class="cv-resumen-text">{{ infoPersonal.resumen }}</p>
+        </section>
+
+        <!-- SECCIÓN 2: EXPERIENCIA LABORAL -->
+        <section class="cv-section">
+          <h3 class="cv-section-title">
+            {{ idioma === 'ES' ? 'EXPERIENCIA LABORAL' : 'WORK EXPERIENCE' }}
+          </h3>
+          <div class="cv-timeline">
+            <div *ngFor="let exp of experiencias" class="cv-timeline-item">
+              <div class="cv-item-header">
+                <div class="cv-item-left">
+                  <strong class="cv-item-role">{{ exp.cargo || (idioma === 'ES' ? 'Cargo' : 'Role') }}</strong>
+                  <span class="cv-item-meta">
+                    {{ idioma === 'ES' ? 'en' : 'at' }} <strong>{{ exp.empresa || (idioma === 'ES' ? 'Empresa' : 'Company') }}</strong>
+                  </span>
+                </div>
+                <div class="cv-item-dates">
+                  {{ exp.fechaInicio }} — {{ exp.fechaFin || (idioma === 'ES' ? 'Presente' : 'Present') }}
+                </div>
+              </div>
+              <p *ngIf="exp.descripcion" class="cv-item-desc">{{ exp.descripcion }}</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECCIÓN 3: CERTIFICACIONES -->
+        <section class="cv-section">
+          <h3 class="cv-section-title">
+            {{ idioma === 'ES' ? 'CERTIFICACIONES Y CURSOS' : 'CERTIFICATIONS & COURSES' }}
+          </h3>
+          <div class="cv-timeline">
+            <div *ngFor="let cert of certificados" class="cv-timeline-item">
+              <div class="cv-item-header">
+                <div class="cv-item-left">
+                  <strong class="cv-item-role">{{ cert.nombreCertificado || (idioma === 'ES' ? 'Certificación' : 'Certification') }}</strong>
+                  <span class="cv-item-meta">
+                    {{ idioma === 'ES' ? 'otorgado por' : 'issued by' }} <strong>{{ cert.institucion || (idioma === 'ES' ? 'Institución' : 'Institution') }}</strong>
+                  </span>
+                </div>
+                <div class="cv-item-dates">
+                  {{ cert.fecha }}
+                </div>
+              </div>
+              <p *ngIf="cert.descripcion" class="cv-item-desc">{{ cert.descripcion }}</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Adornos Filigranados de Pie de Hoja Fina -->
+        <footer class="cv-sheet-footer">
+          <div class="footer-line"></div>
+          <p class="footer-watermark">
+            {{ idioma === 'ES' ? 'Generado con CV Maker' : 'Generated with CV Maker' }}
+          </p>
+        </footer>
+
+      </article>
+
+    </section>
+
+  </main>
+
+</div>
