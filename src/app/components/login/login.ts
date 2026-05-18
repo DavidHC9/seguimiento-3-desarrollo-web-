@@ -17,9 +17,7 @@ export class Login {
     password: new FormControl(''),
   });
 
-  constructor(private authService: Auth, private router: Router) { }
-
-  // Estado para ocultar la visibilidad de la contraseña
+  // State to toggle password visibility
   mostrarContrasena: boolean = false;
 
   toggleMostrarContrasena() {

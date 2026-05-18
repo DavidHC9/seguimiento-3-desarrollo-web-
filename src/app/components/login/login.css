@@ -14,7 +14,7 @@
   --btn-gradient: linear-gradient(90deg, #05262e 0%, #3a4533 50%, #9e7f41 100%);
 }
 
-/* Base Full-Screen Layout */
+/* Diseño base de pantalla completa */
 .login-page-container {
   min-height: 100vh;
   width: 100vw;
@@ -30,7 +30,7 @@
   position: relative;
 }
 
-/* Sparkle background overlay */
+/* Capa superpuesta de destellos de fondo */
 .login-page-container::before {
   content: '';
   position: absolute;
@@ -48,7 +48,7 @@
   z-index: 1;
 }
 
-/* Split Column Grid */
+/* Cuadrícula de columnas divididas */
 .login-split {
   display: flex;
   width: 100%;
@@ -60,7 +60,7 @@
   gap: 2rem;
 }
 
-/* Left Column: Branding and Illustration */
+/* Columna izquierda: Imagen de marca e Ilustración */
 .login-left {
   flex: 1.1;
   display: flex;
@@ -71,21 +71,21 @@
   text-align: center;
 }
 
-/* Constrained and polished circular image container */
+/* Contenedor circular pulido y limitado de la imagen */
 .illustration-wrapper {
   position: relative;
-  width: 260px;
-  height: 260px;
+  width: 320px;
+  height: 320px;
   margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  border: 4px solid var(--gold-flat); /* Elegant gold frame matching the login card */
+  border: 4px solid var(--gold-flat); /* Borde dorado elegante a juego con la tarjeta de login */
   box-shadow: 
     0 15px 35px rgba(0, 0, 0, 0.5), 
     0 0 25px rgba(202, 167, 101, 0.25);
-  overflow: hidden; /* Seamlessly crops any image aspect ratio */
+  overflow: hidden; /* Recorta cualquier proporción de imagen de forma limpia */
   transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease;
 }
 
@@ -99,11 +99,11 @@
 .illustration-img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures any photo crops perfectly without stretching or squeezing */
+  object-fit: cover; /* Asegura que cualquier foto se recorte perfectamente sin estirarse ni aplastarse */
   border-radius: 50%;
 }
 
-/* Animated glow behind illustration */
+/* Resplandor animado detrás de la ilustración */
 .illustration-glow {
   position: absolute;
   top: 50%;
@@ -139,7 +139,7 @@
   opacity: 0.85;
 }
 
-/* Right Column: Card Form Wrapper */
+/* Columna derecha: Envoltorio del formulario en tarjeta */
 .login-right {
   flex: 0.9;
   display: flex;
@@ -148,16 +148,16 @@
   padding: 0.5rem;
 }
 
-/* Compact Premium Login Card with Gold Frame */
+/* Tarjeta de login premium compacta con marco de oro */
 .login-card {
   background-color: var(--cream-card);
-  border: 2px solid var(--gold-flat); /* Strong gold border to define card boundary */
+  border: 2px solid var(--gold-flat); /* Borde dorado marcado para definir el límite de la tarjeta */
   border-radius: 16px;
   box-shadow: 
     0 25px 50px rgba(0, 0, 0, 0.55),
     0 0 30px rgba(202, 167, 101, 0.15),
     inset 0 0 20px rgba(240, 230, 200, 0.1);
-  padding: 1.8rem 2rem; /* Tightened margins for compact look */
+  padding: 1.8rem 2rem; /* Márgenes ajustados para un aspecto compacto */
   width: 100%;
   max-width: 410px;
   position: relative;
@@ -165,7 +165,7 @@
   color: var(--text-dark);
 }
 
-/* Compact Filigree Ornaments in corners */
+/* Adornos de filigrana compactos en las esquinas */
 .card-ornament {
   position: absolute;
   width: 48px;
@@ -186,18 +186,18 @@
   transform: rotate(180deg);
 }
 
-/* Form Styles */
+/* Estilos de formulario */
 .card-title {
   font-family: 'Cinzel', serif;
   color: var(--teal-medium);
   font-size: 1.8rem;
   font-weight: 700;
-  margin-bottom: 1.2rem; /* Tightened space */
+  margin-bottom: 1.2rem; /* Espacio ajustado */
   text-align: center;
 }
 
 .form-group-custom {
-  margin-bottom: 0.9rem; /* Tightened space */
+  margin-bottom: 0.9rem; /* Espacio ajustado */
 }
 
 .label-custom {
@@ -227,9 +227,9 @@
 .input-custom {
   width: 100%;
   background-color: #faf8f4;
-  border: 1.5px solid var(--teal-medium); /* High-contrast input outline */
+  border: 1.5px solid var(--teal-medium); /* Contorno de entrada de alto contraste */
   border-radius: 6px;
-  padding: 8px 12px 8px 38px; /* Compact padding */
+  padding: 8px 12px 8px 38px; /* Relleno compacto */
   font-family: 'Outfit', sans-serif;
   font-size: 0.9rem;
   color: var(--text-dark);
@@ -248,7 +248,7 @@
   background-color: #ffffff;
 }
 
-/* Eye Icon toggle password */
+/* Icono del ojo para alternar contraseña */
 .password-toggle {
   position: absolute;
   right: 12px;
@@ -283,21 +283,21 @@
   text-decoration: underline;
 }
 
-/* Primary Button Styling with Compact Heights */
+/* Estilo del botón principal con alturas compactas */
 .btn-submit {
   width: 100%;
   background: var(--btn-gradient);
   border: none;
   border-radius: 6px;
   color: #ffffff;
-  padding: 10px; /* Tightened button size */
+  padding: 10px; /* Tamaño del botón ajustado */
   font-size: 0.95rem;
   font-weight: 600;
   font-family: 'Outfit', sans-serif;
   cursor: pointer;
   transition: all 0.25s ease;
   box-shadow: 0 4px 10px rgba(5, 38, 46, 0.25);
-  margin-top: 1.2rem; /* Tightened spacing */
+  margin-top: 1.2rem; /* Espacio ajustado */
   position: relative;
   z-index: 2;
 }
@@ -312,12 +312,12 @@
   transform: translateY(0);
 }
 
-/* Ornaments Separator */
+/* Separador con adornos */
 .separator-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 1.1rem 0; /* Tightened spacing */
+  margin: 1.1rem 0; /* Espacio ajustado */
   color: var(--gold-dark);
   font-size: 0.8rem;
   font-weight: 500;
@@ -342,11 +342,11 @@
   white-space: nowrap;
 }
 
-/* Social Buttons */
+/* Botones de Redes Sociales */
 .social-buttons-container {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem; /* Compact list gap */
+  gap: 0.6rem; /* Espacio de lista compacto */
 }
 
 .btn-social {
@@ -355,7 +355,7 @@
   justify-content: center;
   gap: 8px;
   width: 100%;
-  padding: 8px 12px; /* Compact padding */
+  padding: 8px 12px; /* Relleno compacto */
   border-radius: 6px;
   font-size: 0.9rem;
   font-weight: 600;
@@ -392,9 +392,9 @@
   justify-content: center;
 }
 
-/* Footer Section */
+/* Sección de pie de página */
 .card-footer-custom {
-  margin-top: 1.2rem; /* Tightened spacing */
+  margin-top: 1.2rem; /* Espacio ajustado */
   text-align: center;
   font-size: 0.85rem;
   color: var(--text-muted);
@@ -412,7 +412,7 @@
   text-decoration: underline;
 }
 
-/* Animations */
+/* Animaciones */
 @keyframes pulseGlow {
   0% {
     opacity: 0.8;
@@ -424,7 +424,7 @@
   }
 }
 
-/* Responsive Breakpoints */
+/* Puntos de interrupción responsivos (Breakpoints) */
 @media (max-width: 991px) {
   .login-split {
     flex-direction: column;
@@ -435,7 +435,7 @@
   }
   
   .login-left {
-    display: none; /* Hide on mobile/tablet to focus purely on the beautiful card */
+    display: none; /* Ocultar en móviles/tablets para centrarse puramente en la tarjeta */
   }
 
   .login-right {
