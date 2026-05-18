@@ -2,22 +2,22 @@
 
     <div class="login-split">
 
-        <!-- Left Column: Branding and Illustration -->
+        <!-- Columna izquierda: Imagen de marca e Ilustración -->
         <div class="login-left">
             <div class="illustration-wrapper">
                 <div class="illustration-glow"></div>
-                <!-- Points to the custom user image in public/ -->
+                <!-- Enlace a la imagen personalizada del usuario en public/ -->
                 <img src="/imagen.jpg" alt="Resume Maker Illustration" class="illustration-img">
             </div>
             <h1 class="left-title">TÚ PRÓXIMO GRAN<br>TRABAJO EMPIEZA AQUÍ.</h1>
             <p class="left-subtitle">Accede para gestionar tus hojas de vida.</p>
         </div>
 
-        <!-- Right Column: Login Card -->
+        <!-- Columna derecha: Tarjeta de inicio de sesión -->
         <div class="login-right">
             <div class="login-card">
                 
-                <!-- Corner Ornaments (Top-Right and Bottom-Left) -->
+                <!-- Adornos de esquina (Superior-Derecha e Inferior-Izquierda) -->
                 <svg class="card-ornament card-ornament-tr" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M90 10 C90 30, 70 40, 50 40 C30 40, 20 60, 20 80 M90 10 C70 10, 60 20, 60 40 C60 60, 40 70, 20 80 M90 10 C90 10, 85 25, 75 30 C65 35, 60 45, 55 55 M50 20 C45 30, 35 35, 25 35 M40 50 C30 50, 25 60, 25 70" stroke="#caa765" stroke-width="2.5" stroke-linecap="round"/>
                     <circle cx="90" cy="10" r="3.5" fill="#caa765"/>
@@ -34,7 +34,7 @@
 
                 <form [formGroup]="formularioLogin" (ngSubmit)="iniciarSesion()">
                     
-                    <!-- Email field -->
+                    <!-- Campo de Email -->
                     <div class="form-group-custom">
                         <label class="label-custom">Email</label>
                         <div class="input-container-custom">
@@ -53,7 +53,7 @@
                         </div>
                     </div>
 
-                    <!-- Password field -->
+                    <!-- Campo de Contraseña -->
                     <div class="form-group-custom">
                         <label class="label-custom">Contraseña</label>
                         <div class="input-container-custom">
@@ -70,7 +70,7 @@
                                 placeholder="Ingrese su contraseña"
                                 required>
                             
-                            <!-- Interactive toggle eye icon -->
+                            <!-- Icono interactivo para alternar la visibilidad de la contraseña -->
                             <button 
                                 type="button" 
                                 class="password-toggle" 
@@ -89,10 +89,10 @@
                         <a href="#" class="forgot-password-link">¿Olvidaste tu contraseña?</a>
                     </div>
 
-                    <!-- Submit Button -->
+                    <!-- Botón de Envío -->
                     <button type="submit" class="btn-submit">Iniciar sesión</button>
 
-                    <!-- Divider -->
+                    <!-- Divisor -->
                     <div class="separator-container">
                         <span class="separator-line-ornament"></span>
                         <span class="separator-flourish">
@@ -109,7 +109,7 @@
                         <span class="separator-line-ornament"></span>
                     </div>
 
-                    <!-- Social Buttons -->
+                    <!-- Botones de Redes Sociales -->
                     <div class="social-buttons-container">
                         <button type="button" class="btn-social btn-social-google">
                             <span class="social-icon">
@@ -132,7 +132,7 @@
                         </button>
                     </div>
 
-                    <!-- Footer registration link -->
+                    <!-- Pie de página con enlace de registro -->
                     <div class="card-footer-custom">
                         ¿No tienes cuenta? <a href="#" class="register-link">Regístrate</a>
                     </div>

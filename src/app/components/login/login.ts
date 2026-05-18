@@ -15,7 +15,7 @@ export class Login {
     password: new FormControl(''),
   });
 
-  // State to toggle password visibility
+  // Estado para alternar la visibilidad de la contraseña
   mostrarContrasena: boolean = false;
 
   toggleMostrarContrasena() {
