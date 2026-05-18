@@ -51,120 +51,50 @@
   <!-- ==================== CONTENIDO PRINCIPAL ==================== -->
   <main class="home-content">
 
-    <!-- ==================== COLUMNA IZQUIERDA: FORMULARIOS (NO SE IMPRIME) ==================== -->
+    <!-- ==================== COLUMNA IZQUIERDA: PANEL DE BOTONES (NO SE IMPRIME) ==================== -->
     <section class="forms-panel no-print">
       
-      <!-- Panel 1: Información Personal (infoPersonal) -->
-      <div class="accordion-card">
-        <div class="accordion-header">
-          <span class="step-num">1</span>
-          <h3>{{ idioma === 'ES' ? 'Información Personal' : 'Personal Info' }}</h3>
+      <div class="control-panel-card">
+        <div class="control-panel-header">
+          <h3>{{ idioma === 'ES' ? 'Centro de Edición' : 'Edit Center' }}</h3>
+          <p>{{ idioma === 'ES' ? 'Selecciona qué sección deseas redactar' : 'Select which section you want to draft' }}</p>
         </div>
-        <div class="accordion-body">
-          <div class="form-grid">
-            <div class="form-group-custom">
-              <label class="label-custom">{{ idioma === 'ES' ? 'Nombre Completo' : 'Full Name' }}</label>
-              <input type="text" class="input-custom" [(ngModel)]="infoPersonal.nombreCompleto">
+        
+        <div class="control-buttons-stack">
+          <!-- Botón Información Personal -->
+          <button type="button" class="btn-control-select" (click)="abrirModal('personal')">
+            <span class="btn-icon">📝</span>
+            <div class="btn-text-content">
+              <strong>{{ idioma === 'ES' ? 'Información Personal' : 'Personal Info' }}</strong>
+              <span>{{ idioma === 'ES' ? 'Nombre, cargo, contacto, resumen' : 'Name, role, contact, summary' }}</span>
             </div>
-            <div class="form-group-custom">
-              <label class="label-custom">{{ idioma === 'ES' ? 'Cargo / Profesión' : 'Job Title' }}</label>
-              <input type="text" class="input-custom" [(ngModel)]="infoPersonal.cargo">
-            </div>
-            <div class="form-group-custom">
-              <label class="label-custom">Email</label>
-              <input type="email" class="input-custom" [(ngModel)]="infoPersonal.email">
-            </div>
-            <div class="form-group-custom">
-              <label class="label-custom">{{ idioma === 'ES' ? 'Teléfono Celular' : 'Phone Number' }}</label>
-              <input type="text" class="input-custom" [(ngModel)]="infoPersonal.celular">
-            </div>
-            <div class="form-group-custom full-width">
-              <label class="label-custom">{{ idioma === 'ES' ? 'Resumen Profesional' : 'Professional Summary' }}</label>
-              <textarea class="textarea-custom" rows="4" [(ngModel)]="infoPersonal.resumen"></textarea>
-            </div>
-          </div>
-        </div>
-      </div>
+            <span class="arrow-indicator">➔</span>
+          </button>
 
-      <!-- Panel 2: Experiencia Laboral (experiencia) -->
-      <div class="accordion-card">
-        <div class="accordion-header">
-          <span class="step-num">2</span>
-          <h3>{{ idioma === 'ES' ? 'Experiencia Laboral' : 'Work Experience' }}</h3>
-          <button type="button" class="btn-add" (click)="agregarExperiencia()">
-            + {{ idioma === 'ES' ? 'Añadir' : 'Add' }}
+          <!-- Botón Experiencia Laboral -->
+          <button type="button" class="btn-control-select" (click)="abrirModal('experience')">
+            <span class="btn-icon">💼</span>
+            <div class="btn-text-content">
+              <strong>{{ idioma === 'ES' ? 'Experiencia Laboral' : 'Work Experience' }}</strong>
+              <span>{{ idioma === 'ES' ? 'Cargos, empresas y logros' : 'Roles, companies and achievements' }}</span>
+            </div>
+            <span class="arrow-indicator">➔</span>
+          </button>
+
+          <!-- Botón Certificaciones -->
+          <button type="button" class="btn-control-select" (click)="abrirModal('certificate')">
+            <span class="btn-icon">🎓</span>
+            <div class="btn-text-content">
+              <strong>{{ idioma === 'ES' ? 'Certificados y Cursos' : 'Certifications & Courses' }}</strong>
+              <span>{{ idioma === 'ES' ? 'Instituciones y diplomas' : 'Institutions and diplomas' }}</span>
+            </div>
+            <span class="arrow-indicator">➔</span>
           </button>
         </div>
-        <div class="accordion-body">
-          <div *ngFor="let exp of experiencias; let i = index" class="list-item-card">
-            <div class="item-card-header">
-              <h4>{{ idioma === 'ES' ? 'Experiencia' : 'Experience' }} #{{ i + 1 }}</h4>
-              <button type="button" class="btn-delete" (click)="eliminarExperiencia(i)">
-                🗑️
-              </button>
-            </div>
-            <div class="form-grid">
-              <div class="form-group-custom">
-                <label class="label-custom">{{ idioma === 'ES' ? 'Empresa' : 'Company' }}</label>
-                <input type="text" class="input-custom" [(ngModel)]="exp.empresa">
-              </div>
-              <div class="form-group-custom">
-                <label class="label-custom">{{ idioma === 'ES' ? 'Cargo' : 'Role' }}</label>
-                <input type="text" class="input-custom" [(ngModel)]="exp.cargo">
-              </div>
-              <div class="form-group-custom">
-                <label class="label-custom">{{ idioma === 'ES' ? 'Fecha de Inicio' : 'Start Date' }}</label>
-                <input type="text" class="input-custom" placeholder="AAAA-MM-DD" [(ngModel)]="exp.fechaInicio">
-              </div>
-              <div class="form-group-custom">
-                <label class="label-custom">{{ idioma === 'ES' ? 'Fecha de Fin' : 'End Date' }}</label>
-                <input type="text" class="input-custom" placeholder="AAAA-MM-DD" [(ngModel)]="exp.fechaFin">
-              </div>
-              <div class="form-group-custom full-width">
-                <label class="label-custom">{{ idioma === 'ES' ? 'Descripción de Logros' : 'Achievements Description' }}</label>
-                <textarea class="textarea-custom" rows="3" [(ngModel)]="exp.descripcion"></textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Panel 3: Certificados (certificado) -->
-      <div class="accordion-card">
-        <div class="accordion-header">
-          <span class="step-num">3</span>
-          <h3>{{ idioma === 'ES' ? 'Certificaciones y Cursos' : 'Certifications & Courses' }}</h3>
-          <button type="button" class="btn-add" (click)="agregarCertificado()">
-            + {{ idioma === 'ES' ? 'Añadir' : 'Add' }}
-          </button>
-        </div>
-        <div class="accordion-body">
-          <div *ngFor="let cert of certificados; let i = index" class="list-item-card">
-            <div class="item-card-header">
-              <h4>{{ idioma === 'ES' ? 'Certificado' : 'Certificate' }} #{{ i + 1 }}</h4>
-              <button type="button" class="btn-delete" (click)="eliminarCertificado(i)">
-                🗑️
-              </button>
-            </div>
-            <div class="form-grid">
-              <div class="form-group-custom">
-                <label class="label-custom">{{ idioma === 'ES' ? 'Nombre del Certificado' : 'Certificate Name' }}</label>
-                <input type="text" class="input-custom" [(ngModel)]="cert.nombreCertificado">
-              </div>
-              <div class="form-group-custom">
-                <label class="label-custom">{{ idioma === 'ES' ? 'Institución' : 'Institution' }}</label>
-                <input type="text" class="input-custom" [(ngModel)]="cert.institucion">
-              </div>
-              <div class="form-group-custom">
-                <label class="label-custom">{{ idioma === 'ES' ? 'Fecha' : 'Date' }}</label>
-                <input type="text" class="input-custom" placeholder="AAAA-MM-DD" [(ngModel)]="cert.fecha">
-              </div>
-              <div class="form-group-custom full-width">
-                <label class="label-custom">{{ idioma === 'ES' ? 'Descripción / Temas' : 'Description / Topics' }}</label>
-                <textarea class="textarea-custom" rows="2" [(ngModel)]="cert.descripcion"></textarea>
-              </div>
-            </div>
-          </div>
+        <div class="preview-helper-badge">
+          <span class="pulse-dot"></span>
+          <span>{{ idioma === 'ES' ? 'Los cambios se reflejan en tiempo real' : 'Changes reflect in real time' }}</span>
         </div>
       </div>
 
@@ -266,5 +196,157 @@
     </section>
 
   </main>
+
+  <!-- ==================== VENTANAS MODALES FLOTANTES (NO SE IMPRIMEN) ==================== -->
+  
+  <!-- Modal 1: Información Personal -->
+  <div class="modal-backdrop no-print" *ngIf="activeModal === 'personal'" (click)="cerrarModal()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-icon">📝</span>
+          <h3>{{ idioma === 'ES' ? 'Editar Información Personal' : 'Edit Personal Info' }}</h3>
+        </div>
+        <button type="button" class="btn-close-modal" (click)="cerrarModal()">✕</button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-group-custom">
+            <label class="label-custom">{{ idioma === 'ES' ? 'Nombre Completo' : 'Full Name' }}</label>
+            <input type="text" class="input-custom" [(ngModel)]="infoPersonal.nombreCompleto">
+          </div>
+          <div class="form-group-custom">
+            <label class="label-custom">{{ idioma === 'ES' ? 'Cargo / Profesión' : 'Job Title' }}</label>
+            <input type="text" class="input-custom" [(ngModel)]="infoPersonal.cargo">
+          </div>
+          <div class="form-group-custom">
+            <label class="label-custom">Email</label>
+            <input type="email" class="input-custom" [(ngModel)]="infoPersonal.email">
+          </div>
+          <div class="form-group-custom">
+            <label class="label-custom">{{ idioma === 'ES' ? 'Teléfono Celular' : 'Phone Number' }}</label>
+            <input type="text" class="input-custom" [(ngModel)]="infoPersonal.celular">
+          </div>
+          <div class="form-group-custom full-width">
+            <label class="label-custom">{{ idioma === 'ES' ? 'Resumen Profesional' : 'Professional Summary' }}</label>
+            <textarea class="textarea-custom" rows="5" [(ngModel)]="infoPersonal.resumen"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-action btn-pdf" (click)="cerrarModal()">
+          {{ idioma === 'ES' ? 'Guardar y Cerrar' : 'Save & Close' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Experiencia Laboral -->
+  <div class="modal-backdrop no-print" *ngIf="activeModal === 'experience'" (click)="cerrarModal()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-icon">💼</span>
+          <h3>{{ idioma === 'ES' ? 'Editar Experiencia Laboral' : 'Edit Work Experience' }}</h3>
+        </div>
+        <button type="button" class="btn-add" (click)="agregarExperiencia()">
+          + {{ idioma === 'ES' ? 'Añadir' : 'Add' }}
+        </button>
+        <button type="button" class="btn-close-modal" (click)="cerrarModal()">✕</button>
+      </div>
+      
+      <div class="modal-body scrollable-modal-body">
+        <div *ngFor="let exp of experiencias; let i = index" class="list-item-card">
+          <div class="item-card-header">
+            <h4>{{ idioma === 'ES' ? 'Experiencia' : 'Experience' }} #{{ i + 1 }}</h4>
+            <button type="button" class="btn-delete" (click)="eliminarExperiencia(i)">
+              🗑️
+            </button>
+          </div>
+          <div class="form-grid">
+            <div class="form-group-custom">
+              <label class="label-custom">{{ idioma === 'ES' ? 'Empresa' : 'Company' }}</label>
+              <input type="text" class="input-custom" [(ngModel)]="exp.empresa">
+            </div>
+            <div class="form-group-custom">
+              <label class="label-custom">{{ idioma === 'ES' ? 'Cargo' : 'Role' }}</label>
+              <input type="text" class="input-custom" [(ngModel)]="exp.cargo">
+            </div>
+            <div class="form-group-custom">
+              <label class="label-custom">{{ idioma === 'ES' ? 'Fecha de Inicio' : 'Start Date' }}</label>
+              <input type="text" class="input-custom" placeholder="AAAA-MM-DD" [(ngModel)]="exp.fechaInicio">
+            </div>
+            <div class="form-group-custom">
+              <label class="label-custom">{{ idioma === 'ES' ? 'Fecha de Fin' : 'End Date' }}</label>
+              <input type="text" class="input-custom" placeholder="AAAA-MM-DD" [(ngModel)]="exp.fechaFin">
+            </div>
+            <div class="form-group-custom full-width">
+              <label class="label-custom">{{ idioma === 'ES' ? 'Descripción de Logros' : 'Achievements Description' }}</label>
+              <textarea class="textarea-custom" rows="3" [(ngModel)]="exp.descripcion"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-action btn-pdf" (click)="cerrarModal()">
+          {{ idioma === 'ES' ? 'Guardar y Cerrar' : 'Save & Close' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Certificados y Cursos -->
+  <div class="modal-backdrop no-print" *ngIf="activeModal === 'certificate'" (click)="cerrarModal()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-icon">🎓</span>
+          <h3>{{ idioma === 'ES' ? 'Editar Certificaciones y Cursos' : 'Edit Certifications & Courses' }}</h3>
+        </div>
+        <button type="button" class="btn-add" (click)="agregarCertificado()">
+          + {{ idioma === 'ES' ? 'Añadir' : 'Add' }}
+        </button>
+        <button type="button" class="btn-close-modal" (click)="cerrarModal()">✕</button>
+      </div>
+      
+      <div class="modal-body scrollable-modal-body">
+        <div *ngFor="let cert of certificados; let i = index" class="list-item-card">
+          <div class="item-card-header">
+            <h4>{{ idioma === 'ES' ? 'Certificado' : 'Certificate' }} #{{ i + 1 }}</h4>
+            <button type="button" class="btn-delete" (click)="eliminarCertificado(i)">
+              🗑️
+            </button>
+          </div>
+          <div class="form-grid">
+            <div class="form-group-custom">
+              <label class="label-custom">{{ idioma === 'ES' ? 'Nombre del Certificado' : 'Certificate Name' }}</label>
+              <input type="text" class="input-custom" [(ngModel)]="cert.nombreCertificado">
+            </div>
+            <div class="form-group-custom">
+              <label class="label-custom">{{ idioma === 'ES' ? 'Institución' : 'Institution' }}</label>
+              <input type="text" class="input-custom" [(ngModel)]="cert.institucion">
+            </div>
+            <div class="form-group-custom">
+              <label class="label-custom">{{ idioma === 'ES' ? 'Fecha' : 'Date' }}</label>
+              <input type="text" class="input-custom" placeholder="AAAA-MM-DD" [(ngModel)]="cert.fecha">
+            </div>
+            <div class="form-group-custom full-width">
+              <label class="label-custom">{{ idioma === 'ES' ? 'Descripción / Temas' : 'Description / Topics' }}</label>
+              <textarea class="textarea-custom" rows="3" [(ngModel)]="cert.descripcion"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-action btn-pdf" (click)="cerrarModal()">
+          {{ idioma === 'ES' ? 'Guardar y Cerrar' : 'Save & Close' }}
+        </button>
+      </div>
+    </div>
+  </div>
 
 </div>

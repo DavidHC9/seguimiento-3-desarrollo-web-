@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Auth } from '../../services/auth';
 
 interface Experiencia {
   empresa: string;
@@ -18,6 +19,18 @@ interface Certificado {
   descripcion: string;
 }
 
+interface CVData {
+  infoPersonal: {
+    nombreCompleto: string;
+    cargo: string;
+    email: string;
+    celular: string;
+    resumen: string;
+  };
+  experiencias: Experiencia[];
+  certificados: Certificado[];
+}
+
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -26,40 +39,124 @@ interface Certificado {
   styleUrl: './home.css',
 })
 export class Home {
-  // Estado de idioma ('ES' para Español, 'EN' para Inglés)
+  // Idioma activo ('ES' / 'EN')
   idioma: 'ES' | 'EN' = 'ES';
 
-  // Datos personales (MongoDB: colección 'infoPersonal')
+  // Control de ventana modal activa ('personal' | 'experience' | 'certificate' | null)
+  activeModal: 'personal' | 'experience' | 'certificate' | null = null;
+
+  // Variables vinculadas al formulario y a la hoja A4 en tiempo real
   infoPersonal = {
-    nombreCompleto: 'David Herrera',
-    cargo: 'Ingeniero de Software',
-    email: 'david@gmail.com',
-    celular: '3001234567',
-    resumen: 'Desarrollador Backend apasionado por la creación de soluciones escalables y eficientes. Especialista en la construcción de APIs REST robustas utilizando Node.js, Express y bases de datos relacionales y no relacionales como MongoDB.',
+    nombreCompleto: '',
+    cargo: '',
+    email: '',
+    celular: '',
+    resumen: '',
   };
 
-  // Experiencia Laboral (MongoDB: colección 'experiencia')
-  experiencias: Experiencia[] = [
-    {
-      empresa: 'Tech Corp',
-      cargo: 'Desarrollador Backend',
-      fechaInicio: '2023-01-01',
-      fechaFin: '2024-01-01',
-      descripcion: 'Diseño e implementación de microservicios con Node.js, optimización de consultas en bases de datos MongoDB y mantenimiento de pipelines de integración continua.',
-    },
-  ];
+  experiencias: Experiencia[] = [];
+  certificados: Certificado[] = [];
 
-  // Certificados (MongoDB: colección 'certificado')
-  certificados: Certificado[] = [
-    {
-      nombreCertificado: 'Curso de Node y MongoDB',
-      institucion: 'Udemy',
-      fecha: '2024-01-15',
-      descripcion: 'Aprendizaje profundo sobre modelado de datos, agregaciones, seguridad y despliegue de bases de datos MongoDB y APIs en producción.',
+  // Almacén completo de datos en Español (MongoDB: infoPersonal, experiencia, certificado)
+  private datosES: CVData = {
+    infoPersonal: {
+      nombreCompleto: 'David Herrera',
+      cargo: 'Ingeniero de Software',
+      email: 'david@gmail.com',
+      celular: '3001234567',
+      resumen: 'Desarrollador Backend apasionado por la creación de soluciones escalables y eficientes. Especialista en la construcción de APIs REST robustas utilizando Node.js, Express y bases de datos relacionales y no relacionales como MongoDB.',
     },
-  ];
+    experiencias: [
+      {
+        empresa: 'Tech Corp',
+        cargo: 'Desarrollador Backend',
+        fechaInicio: '2023-01-01',
+        fechaFin: '2024-01-01',
+        descripcion: 'Diseño e implementación de microservicios con Node.js, optimización de consultas en bases de datos MongoDB y mantenimiento de pipelines de integración continua.',
+      },
+    ],
+    certificados: [
+      {
+        nombreCertificado: 'Curso de Node y MongoDB',
+        institucion: 'Udemy',
+        fecha: '2024-01-15',
+        descripcion: 'Aprendizaje profundo sobre modelado de datos, agregaciones, seguridad y despliegue de bases de datos MongoDB y APIs en producción.',
+      },
+    ],
+  };
 
-  constructor(private router: Router) {}
+  // Almacén completo de datos en Inglés (MongoDB: infoPersonal, experiencia, certificado)
+  private datosEN: CVData = {
+    infoPersonal: {
+      nombreCompleto: 'David Herrera',
+      cargo: 'Software Engineer',
+      email: 'david@gmail.com',
+      celular: '3001234567',
+      resumen: 'Backend Developer passionate about building scalable and efficient solutions. Specialist in constructing robust REST APIs using Node.js, Express, and SQL/NoSQL databases like MongoDB.',
+    },
+    experiencias: [
+      {
+        empresa: 'Tech Corp',
+        cargo: 'Backend Developer',
+        fechaInicio: '2023-01-01',
+        fechaFin: '2024-01-01',
+        descripcion: 'Design and implementation of microservices with Node.js, optimization of queries in MongoDB databases, and maintenance of continuous integration pipelines.',
+      },
+    ],
+    certificados: [
+      {
+        nombreCertificado: 'Node & MongoDB Certification',
+        institucion: 'Udemy',
+        fecha: '2024-01-15',
+        descripcion: 'Deep learning on data modeling, aggregations, security, and deployment of MongoDB databases and APIs in production environments.',
+      },
+    ],
+  };
+
+  constructor(private authService: Auth, private router: Router) {
+    // Inicializar cargando los datos en Español por defecto
+    this.cargarDatos('ES');
+  }
+
+  // --- Manejo de Datos por Idioma ---
+  private cargarDatos(lang: 'ES' | 'EN') {
+    const origen = lang === 'ES' ? this.datosES : this.datosEN;
+    
+    // Clonación profunda para evitar referencias cruzadas
+    this.infoPersonal = JSON.parse(JSON.stringify(origen.infoPersonal));
+    this.experiencias = JSON.parse(JSON.stringify(origen.experiencias));
+    this.certificados = JSON.parse(JSON.stringify(origen.certificados));
+  }
+
+  private guardarDatosActuales() {
+    const destino = this.idioma === 'ES' ? this.datosES : this.datosEN;
+    
+    destino.infoPersonal = JSON.parse(JSON.stringify(this.infoPersonal));
+    destino.experiencias = JSON.parse(JSON.stringify(this.experiencias));
+    destino.certificados = JSON.parse(JSON.stringify(this.certificados));
+  }
+
+  cambiarIdioma(lang: 'ES' | 'EN') {
+    if (this.idioma === lang) return;
+    
+    // Guardar los datos actuales modificados en el idioma viejo
+    this.guardarDatosActuales();
+    
+    // Cambiar la bandera de idioma
+    this.idioma = lang;
+    
+    // Cargar los datos del nuevo idioma
+    this.cargarDatos(lang);
+  }
+
+  // --- Control de Modales ---
+  abrirModal(seccion: 'personal' | 'experience' | 'certificate') {
+    this.activeModal = seccion;
+  }
+
+  cerrarModal() {
+    this.activeModal = null;
+  }
 
   // --- Métodos para la colección 'experiencia' ---
   agregarExperiencia() {
@@ -98,20 +195,17 @@ export class Home {
     }
   }
 
-  // --- Selección de Idioma ---
-  cambiarIdioma(lang: 'ES' | 'EN') {
-    this.idioma = lang;
-  }
-
   // --- Descarga de PDF ---
-  // Dispara el sistema de impresión del navegador, configurado en CSS para ocultar los formularios
-  // y renderizar únicamente la hoja de vida A4 de manera impecable y vectorizada.
   descargarPDF() {
     window.print();
   }
 
   // --- Cierre de Sesión ---
   cerrarSesion() {
+    // 1. Limpiar token de sesión para autorizar la navegación del Guard de login
+    this.authService.cerrarSesion();
+    
+    // 2. Redirigir a login
     this.router.navigate(['/login']);
   }
 }
