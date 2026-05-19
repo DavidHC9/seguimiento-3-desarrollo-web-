@@ -78,23 +78,15 @@ export class Home implements OnInit {
           this.infoPersonal = res[0];
           this.infoPersonalId = res[0]._id;
         } else {
-          // Si MongoDB está vacío, creamos una información por defecto mediante POST
-          const defaultInfo = {
-            nombreCompleto: 'David Herrera',
-            cargo: 'Ingeniero de Software',
-            email: 'david@gmail.com',
-            celular: '3001234567',
-            resumen: 'Desarrollador Backend apasionado por la creación de soluciones escalables y eficientes. Especialista en la construcción de APIs REST robustas utilizando Node.js, Express y bases de datos relacionales y no relacionales como MongoDB.',
+          // Si MongoDB está vacío, inicializamos la información en blanco
+          this.infoPersonal = {
+            nombreCompleto: '',
+            cargo: '',
+            email: '',
+            celular: '',
+            resumen: '',
           };
-          this.http.post<any>(`${this.apiUrl}/info`, defaultInfo).subscribe({
-            next: (created) => {
-              if (created.info) {
-                this.infoPersonal = created.info;
-                this.infoPersonalId = created.info._id;
-              }
-            },
-            error: (err) => console.error('Error creando InfoPersonal por defecto:', err)
-          });
+          this.infoPersonalId = null;
         }
       },
       error: (err) => console.error('Error consultando InfoPersonal:', err)
@@ -104,25 +96,7 @@ export class Home implements OnInit {
   obtenerExperiencias() {
     this.http.get<Experiencia[]>(`${this.apiUrl}/experiencia`).subscribe({
       next: (res) => {
-        this.experiencias = res;
-        if (!res || res.length === 0) {
-          // Si no hay experiencias en MongoDB, añadimos la primera por defecto mediante POST
-          const defaultExp = {
-            empresa: 'Tech Corp',
-            cargo: 'Desarrollador Backend',
-            fechaInicio: '2023-01-01',
-            fechaFin: '2024-01-01',
-            descripcion: 'Diseño e implementación de microservicios con Node.js, optimización de consultas en bases de datos MongoDB y mantenimiento de pipelines de integración continua.',
-          };
-          this.http.post<any>(`${this.apiUrl}/experiencia`, defaultExp).subscribe({
-            next: (created) => {
-              if (created.experiencia) {
-                this.experiencias.push(created.experiencia);
-              }
-            },
-            error: (err) => console.error('Error creando experiencia por defecto:', err)
-          });
-        }
+        this.experiencias = res || [];
       },
       error: (err) => console.error('Error consultando experiencias:', err)
     });
@@ -131,24 +105,7 @@ export class Home implements OnInit {
   obtenerCertificados() {
     this.http.get<Certificado[]>(`${this.apiUrl}/certificado`).subscribe({
       next: (res) => {
-        this.certificados = res;
-        if (!res || res.length === 0) {
-          // Si no hay certificados en MongoDB, creamos uno por defecto mediante POST
-          const defaultCert = {
-            nombreCertificado: 'Curso de Node y MongoDB',
-            institucion: 'Udemy',
-            fecha: '2024-01-15',
-            descripcion: 'Aprendizaje profundo sobre modelado de datos, agregaciones, seguridad y despliegue de bases de datos MongoDB y APIs en producción.',
-          };
-          this.http.post<any>(`${this.apiUrl}/certificado`, defaultCert).subscribe({
-            next: (created) => {
-              if (created.certificado) {
-                this.certificados.push(created.certificado);
-              }
-            },
-            error: (err) => console.error('Error creando certificado por defecto:', err)
-          });
-        }
+        this.certificados = res || [];
       },
       error: (err) => console.error('Error consultando certificados:', err)
     });
