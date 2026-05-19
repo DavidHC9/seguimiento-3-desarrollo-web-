@@ -23,6 +23,18 @@ export class Auth {
     return this.http.post<LoginResponse>(this.apiUrl, body);
   }
 
+  Register(nombre: string, email: string, password: string): Observable<any> {
+    let body = {
+      nombre: nombre,
+      email: email,
+      password: password
+    }
+
+    // El endpoint de registro correcto en el backend es /api/usuario/registrar
+    const registerUrl = 'http://localhost:2026/api/usuario/registrar';
+    return this.http.post<any>(registerUrl, body);
+  }
+
   guardarToken(token: string): void {
     sessionStorage.setItem('token_usuario', token);
 
